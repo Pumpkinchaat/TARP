@@ -1,0 +1,28 @@
+{
+  "name": "tarp",
+  "version": "1.0.0",
+  "description": "TARP project made by Susmit, Aditya, Chirayu, Alvia, Aarushi, Chirag",
+  "main": "index.js",
+  "scripts": {
+    "serverDev": "nodemon siteBackend/server.js",
+    "serverProd": "node siteBackend/server.js"
+  },
+  "author": "Susmit, Chirayu, Chirag, Aditya, Alvia, Aarushi",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.6.0",
+    "helmet": "^6.0.0",
+    "hpp": "^0.2.3",
+    "mongoose": "^7.0.0",
+    "morgan": "^1.10.0",
+    "openai": "^3.2.1",
+    "openapi": "^1.0.1",
+    "puppeteer": "^19.8.2",
+    "request-promise": "^4.2.6",
+    "xss-clean": "^0.1.1"
+  }
+}
