@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "serverDev": "nodemon siteBackend/server.js",
-    "serverProd": "node siteBackend/server.js"
+    "serverProd": "node siteBackend/server.js",
+    "build": "node node_modules/puppeteer/install.js",
+    "hello": "echo \"hello\"",
+    "bye": "echo \"bye\""
   },
   "author": "Susmit, Chirayu, Chirag, Aditya, Alvia, Aarushi",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-mongo-sanitize": "^2.2.0",
