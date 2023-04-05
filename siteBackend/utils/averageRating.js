@@ -9,10 +9,12 @@ exports.getAverageRating = (reviewsRatings) => {
   let ratingsTot = 0;
 
   for (let reviewItem of reviewsRatings) {
-    total += reviewItem.review.length;
-    ratingsTot += (reviewItem.rating / 5) * reviewItem.review.length;
+    if (reviewItem && reviewItem.rating) {
+      total += reviewItem.review.length;
+      ratingsTot += (reviewItem.rating / 5) * reviewItem.review.length;
+    }
   }
 
   const avgRating = ratingsTot / total;
-  return (avgRating * 5);
+  return avgRating * 5;
 };
