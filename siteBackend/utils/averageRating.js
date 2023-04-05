@@ -9,6 +9,8 @@ exports.getAverageRating = (reviewsRatings) => {
   let ratingsTot = 0;
 
   for (let reviewItem of reviewsRatings) {
+    console.log("[Review Item]");
+    console.log(reviewItem);
     if (reviewItem && reviewItem.rating) {
       total += reviewItem.review.length;
       ratingsTot += (reviewItem.rating / 5) * reviewItem.review.length;
