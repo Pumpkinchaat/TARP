@@ -1,3 +1,4 @@
+const LDAModelling = require("../topicModelling/index");
 //TODO: sites to scrape
 //amazon / flipkart / mouthshut
 const AppError = require("../utils/appError");
@@ -55,7 +56,7 @@ const amazonReviewScraper = async (reviewsRatings, productName, page) => {
 
     //   const reviewsRatings = []; //! delete this line in production
 
-    while (counter < 10) {
+    while (counter < 1) {
       try {
         await page.goto(`${reviewPageUrl}?pageNumber=${counter + 1}`);
         await waitRandomTime();
@@ -134,7 +135,7 @@ const flipkartReviewScraper = async (reviewsRatings, productName, page) => {
 
     let counter = 0;
 
-    while (counter < 10) {
+    while (counter < 1) {
       try {
         await page.goto(`${reviewSearchUrl}${counter + 1}`);
         await waitRandomTime();
@@ -201,7 +202,7 @@ const mouthShutScraper = async (reviewsRatings, productName, page) => {
 
     let counter = 0;
 
-    while (counter < 10) {
+    while (counter < 1) {
       await page.goto(`${reviewPageUrl}-page-${counter + 1}`);
       await waitRandomTime();
       html = await page.content();
@@ -279,6 +280,8 @@ const main = async (id) => {
   const significantReviews = getSignificantReviews(reviewsRatings);
   let sentiment;
 
+  const keywords = LDAModelling(reviewsRatings);
+
   if (averageRating < 2) sentiment = "Negative";
   else if (averageRating < 3) sentiment = "Neutral";
   else sentiment = "Positive";
@@ -289,6 +292,7 @@ const main = async (id) => {
   product.sentiment = sentiment;
   product.averageRating = averageRating;
   product.significantReviews = significantReviews;
+  product.keywords = keywords;
 
   await product.save();
   console.log("[INFO] Product ID: " + id + " has been successfully updated");

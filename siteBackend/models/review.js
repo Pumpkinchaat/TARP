@@ -32,6 +32,12 @@ const productReviewSchema = new Schema({
     enum: ["Positive", "Negative", "Neutral"],
   },
   averageRating: Number,
+  keywords: [
+    {
+      text: String,
+      value: Number,
+    },
+  ],
   significantReviews: [
     {
       site: String,

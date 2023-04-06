@@ -41,6 +41,10 @@ const server = app.listen(port, () => {
 // global unhandledRejection catcher (async code exception handler)
 process.on("unhandledRejection", (err) => {
   console.log(err.name, err.message);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(err);
+  }
+  
   console.log("unhandled REJECTION 💥 shutting down");
   server.close(() => {
     process.exit(1);

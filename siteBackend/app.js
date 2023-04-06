@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const cors = require("cors");
 
 //routers
 const productRouter = require("./routes/product");
@@ -21,14 +22,28 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev")); // to enable logging
 }
 
-// for preventing DoS
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this IP, please try again in an hour",
-});
+//white-listing the localhost:3000
+const whitelist = ["http://localhost:3000" , undefined];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
 
-app.use("/api", limiter);
+//!removing late limiter for testing purposes
+// for preventing DoS
+// const limiter = rateLimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many requests from this IP, please try again in an hour",
+// });
+
+// app.use("/api", limiter);
 
 // for security
 app.use(helmet());
